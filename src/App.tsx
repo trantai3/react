@@ -1,11 +1,11 @@
 import Router from "./routes";
 
-function App() {
+const App = () => {
   return (
     <>
       <Router />
     </>
   );
-}
+};
 
 export default App;
