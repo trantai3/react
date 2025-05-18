@@ -1,5 +1,7 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
+
 const Register = lazy(() => import("../pages/auth/register"));
 const Login = lazy(() => import("../pages/auth/login"));
 const ForgotPassword = lazy(() => import("../pages/auth/forgotPass"));
@@ -10,6 +12,8 @@ const Lesson1 = lazy(() => import("../pages/lesson1"));
 const Lesson2 = lazy(() => import("../pages/lesson2"));
 const Lesson3 = lazy(() => import("../pages/lesson3"));
 const Lesson4 = lazy(() => import("../pages/lesson4"));
+const Lesson5 = lazy(() => import("../pages/lesson5"));
+
 const router = createBrowserRouter([
   {
     path: "register",
@@ -39,12 +43,18 @@ const router = createBrowserRouter([
     path: "welcome",
     element: (
       <Suspense>
-        <Welcome />
+        <ProtectedRoute>
+          <Welcome />
+        </ProtectedRoute>
       </Suspense>
     ),
   },
   {
-    element: <LayoutUser />,
+    element: (
+      <ProtectedRoute>
+        <LayoutUser />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/lesson",
@@ -57,7 +67,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <LayoutUser />,
+    element: (
+      <ProtectedRoute>
+        <LayoutUser />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/lesson/1",
@@ -70,7 +84,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <LayoutUser />,
+    element: (
+      <ProtectedRoute>
+        <LayoutUser />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/lesson/2",
@@ -83,7 +101,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <LayoutUser />,
+    element: (
+      <ProtectedRoute>
+        <LayoutUser />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/lesson/3",
@@ -96,13 +118,34 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <LayoutUser />,
+    element: (
+      <ProtectedRoute>
+        <LayoutUser />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/lesson/4",
         element: (
           <Suspense>
             <Lesson4 />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
+    element: (
+      <ProtectedRoute>
+        <LayoutUser />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "/lesson/5",
+        element: (
+          <Suspense>
+            <Lesson5 />
           </Suspense>
         ),
       },

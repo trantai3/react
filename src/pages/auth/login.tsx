@@ -1,11 +1,22 @@
 import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Flex, Card, Typography } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../store/hooks";
+import { login } from "../../store/authSlice";
 
 const Login: React.FC = () => {
-  const onFinish = (values: string) => {
-    console.log("Received values of form: ", values);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onFinish = (values: any) => {
+    dispatch(
+      login({
+        email: values.email,
+      })
+    );
+    navigate("/welcome");
   };
 
   return (
@@ -47,10 +58,10 @@ const Login: React.FC = () => {
 
           <Form.Item>
             <Button block type="primary" htmlType="submit">
-              <Link to="/welcome">Sign in</Link>
+              Sign in
             </Button>
             <p className="mt-[12px]">
-              Don’t have an account yet? <Link to="/register">Sign up</Link>
+              Don't have an account yet? <Link to="/register">Sign up</Link>
             </p>
           </Form.Item>
         </Form>

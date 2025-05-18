@@ -1,7 +1,17 @@
 import { Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../store/hooks";
+import { logout } from "../../../store/authSlice";
 
 const Header = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
   return (
     <div className="flex justify-between">
       <Link to="/lesson">
@@ -10,9 +20,9 @@ const Header = () => {
       <b className="text-[24px] text-[#1677ff]">
         Bài thực hành react ( ts required )
       </b>
-      <Link to="">
-        <Button type="primary">Log out</Button>
-      </Link>
+      <Button type="primary" onClick={handleLogout}>
+        Log out
+      </Button>
     </div>
   );
 };
