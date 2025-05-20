@@ -33,6 +33,10 @@ const items = [
     key: "/lesson/8",
     label: <Link to="/lesson/8">Lesson 8</Link>,
   },
+  {
+    key: "/lesson/9",
+    label: <Link to="/lesson/9">Lesson 9</Link>,
+  },
 ];
 const Sider = () => {
   const location = useLocation();
