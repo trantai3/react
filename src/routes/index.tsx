@@ -13,6 +13,7 @@ const Lesson2 = lazy(() => import("../pages/lesson2"));
 const Lesson3 = lazy(() => import("../pages/lesson3"));
 const Lesson4 = lazy(() => import("../pages/lesson4"));
 const Lesson5 = lazy(() => import("../pages/lesson5"));
+const Lesson6 = lazy(() => import("../pages/lesson6"));
 const Lesson7 = lazy(() => import("../pages/lesson7"));
 const Lesson9 = lazy(() => import("../pages/lesson9"));
 const Products = lazy(() => import("../pages/Products"));
@@ -103,6 +104,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <Lesson5 />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/lesson/6",
+        element: (
+          <Suspense>
+            <Lesson6 />
           </Suspense>
         ),
       },
