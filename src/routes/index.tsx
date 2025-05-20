@@ -7,6 +7,7 @@ const Login = lazy(() => import("../pages/auth/login"));
 const ForgotPassword = lazy(() => import("../pages/auth/forgotPass"));
 const Welcome = lazy(() => import("../pages/welcome"));
 const LayoutUser = lazy(() => import("../components/layouts/index"));
+const Hello = lazy(() => import("../pages/hello"));
 const AllLesson = lazy(() => import("../pages/all-lesson"));
 const Lesson1 = lazy(() => import("../pages/lesson1"));
 const Lesson2 = lazy(() => import("../pages/lesson2"));
@@ -18,6 +19,14 @@ const Lesson7 = lazy(() => import("../pages/lesson7"));
 const Lesson9 = lazy(() => import("../pages/lesson9"));
 const Products = lazy(() => import("../pages/Products"));
 const router = createBrowserRouter([
+  {
+    path: "",
+    element: (
+      <Suspense>
+        <Hello />
+      </Suspense>
+    ),
+  },
   {
     path: "register",
     element: (
