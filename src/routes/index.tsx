@@ -14,6 +14,7 @@ const Lesson3 = lazy(() => import("../pages/lesson3"));
 const Lesson4 = lazy(() => import("../pages/lesson4"));
 const Lesson5 = lazy(() => import("../pages/lesson5"));
 const Lesson7 = lazy(() => import("../pages/lesson7"));
+const Products = lazy(() => import("../pages/Products"));
 const router = createBrowserRouter([
   {
     path: "register",
@@ -109,6 +110,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <Lesson7 />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/lesson/8",
+        element: (
+          <Suspense>
+            <Products />
           </Suspense>
         ),
       },
