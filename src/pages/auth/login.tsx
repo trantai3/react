@@ -9,13 +9,8 @@ const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onFinish = (values: any) => {
-    dispatch(
-      login({
-        email: values.email,
-      })
-    );
+  const onFinish = () => {
+    dispatch(login());
     navigate("/welcome");
   };
 

@@ -4,10 +4,6 @@ import { Button, Form, Input, Card, Typography } from "antd";
 import { Link } from "react-router-dom";
 
 const ForgotPassword: React.FC = () => {
-  const onFinish = (values: string) => {
-    console.log("Received values of form: ", values);
-  };
-
   return (
     <div className="min-h-screen flex justify-center items-center">
       <Card>
@@ -18,7 +14,6 @@ const ForgotPassword: React.FC = () => {
           className="w-[400px]"
           name="login"
           initialValues={{ remember: false }}
-          onFinish={onFinish}
         >
           <Form.Item
             name="email"

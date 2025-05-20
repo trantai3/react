@@ -105,7 +105,7 @@ const Lesson5 = () => {
           </>
         }
       >
-        <Button>Column Settings</Button>
+        <Button>Column</Button>
       </Popover>
 
       <Table

@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between items-center">
       <Link to="/lesson">
         <Button type="primary">All lesson</Button>
       </Link>
