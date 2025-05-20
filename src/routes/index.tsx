@@ -23,7 +23,9 @@ const router = createBrowserRouter([
     path: "",
     element: (
       <Suspense>
-        <Hello />
+        <ProtectedRoute>
+          <Hello />
+        </ProtectedRoute>
       </Suspense>
     ),
   },
