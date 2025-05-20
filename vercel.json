@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/welcome",
+      "destination": "/login",
       "permanent": true
     }
   ]
