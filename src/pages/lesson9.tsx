@@ -147,8 +147,7 @@ const Lesson9 = () => {
   const handleAddOk = async () => {
     try {
       const values = await form2.validateFields();
-      const newId = Math.max(...data.map((item) => item.id)) + 1;
-      setData((prevData) => [...prevData, { ...values, id: newId }]);
+      setData((prevData) => [...prevData, { ...values, id: 11 }]);
       setIsModalAddOpen(false);
       form2.resetFields();
     } catch (error) {
