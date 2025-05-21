@@ -1,31 +1,43 @@
 import { Button, Card, Col, DatePicker, Form, Input, Row } from "antd";
+import type { FormInstance } from "antd";
 const { RangePicker } = DatePicker;
 import dayjs from "dayjs";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 const dateFormat = "DD-MM-YYYY";
+interface SubmitButtonProps {
+  form: FormInstance;
+}
 const Lesson4 = () => {
-  const [form] = Form.useForm();
-  const [isFormValid, setIsFormValid] = useState<boolean>();
-  const onFieldsChange = async () => {
-    const hasErrors = form
-      .getFieldsError()
-      .some(({ errors }) => errors.length > 0);
+  const [form1] = Form.useForm();
+  const [form2] = Form.useForm();
+  const SubmitButton: React.FC<React.PropsWithChildren<SubmitButtonProps>> = ({
+    form,
+    children,
+  }) => {
+    const [submittable, setSubmittable] = useState<boolean>(false);
+    const values = Form.useWatch([], form);
+    useEffect(() => {
+      form
+        .validateFields({ validateOnly: true })
+        .then(() => setSubmittable(true))
+        .catch(() => setSubmittable(false));
+    }, [form, values]);
 
-    const allTouched = form
-      .getFieldsError()
-      .every(({ name }) => form.isFieldTouched(name));
-
-    setIsFormValid(!hasErrors && allTouched);
+    return (
+      <Button type="primary" htmlType="submit" disabled={!submittable}>
+        {children}
+      </Button>
+    );
   };
   return (
     <div className="p-5">
       <h1 className="text-[20px] font-bold">Thực hành validate form</h1>
       <Card title="Onblur">
         <Form
-          form={form}
+          name="validateOnly"
+          form={form1}
           layout="vertical"
           validateTrigger="onBlur"
-          onFieldsChange={onFieldsChange}
         >
           {/* Username & Email */}
           <Row gutter={24}>
@@ -263,16 +275,14 @@ const Lesson4 = () => {
           {/* Button */}
           <Row gutter={24}>
             <Col span={24}>
-              <Button type="primary" htmlType="submit" disabled={!isFormValid}>
-                Submit
-              </Button>
+              <SubmitButton form={form1}>Submit</SubmitButton>
             </Col>
           </Row>
         </Form>
       </Card>
       <Card className="!mt-[24px]" title="Onsubmit">
         <Form
-          form={form}
+          form={form2}
           onFinish={(value) => console.log(value)}
           layout="vertical"
         >

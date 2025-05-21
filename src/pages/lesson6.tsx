@@ -29,7 +29,6 @@ const Lesson6 = () => {
   const [result, setResult] = useState<any>(null);
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-
   useEffect(() => {
     const tagsParam = searchParams.get("tags");
     const lastNameParam = searchParams.get("lastName");
