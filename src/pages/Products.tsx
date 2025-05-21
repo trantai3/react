@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, Pagination, Image } from "antd";
 import { usePagination } from "../hooks/usePagination";
+import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 interface Product {
   id: number;
@@ -15,11 +16,14 @@ interface Product {
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [totalItems, setTotalItems] = useState(0);
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialPage = Number(searchParams.get("page")) || 1;
+  const initialPageSize = Number(searchParams.get("pageSize")) || 10;
   const { currentPage, pageSize, handlePageChange, handlePageSizeChange } =
     usePagination({
       totalItems,
-      pageSize: 10,
+      initialPage,
+      initialPageSize,
     });
 
   useEffect(() => {
@@ -35,8 +39,12 @@ const Products = () => {
         console.error("Error fetching products:", error);
       }
     };
+    setSearchParams({
+      page: currentPage.toString(),
+      pageSize: pageSize.toString(),
+    });
     fetchProducts();
-  }, [currentPage, pageSize]);
+  }, [currentPage, pageSize, setSearchParams]);
 
   return (
     <div className="container mx-auto p-4">

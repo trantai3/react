@@ -112,7 +112,7 @@ const Lesson9 = () => {
   const { currentPage, pageSize, handlePageChange, handlePageSizeChange } =
     usePagination({
       totalItems,
-      pageSize: 10,
+      initialPageSize: 10,
     });
   useEffect(() => {
     const fetchData = async () => {

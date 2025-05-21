@@ -3,7 +3,7 @@ import { useState } from "react";
 interface UsePaginationProps {
   totalItems: number;
   initialPage?: number;
-  pageSize?: number;
+  initialPageSize?: number;
 }
 
 interface UsePaginationReturn {
@@ -17,10 +17,10 @@ interface UsePaginationReturn {
 export const usePagination = ({
   totalItems,
   initialPage = 1,
-  pageSize = 10,
+  initialPageSize = 10,
 }: UsePaginationProps): UsePaginationReturn => {
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [currentPageSize, setCurrentPageSize] = useState(pageSize);
+  const [currentPageSize, setCurrentPageSize] = useState(initialPageSize);
 
   const totalPages = Math.ceil(totalItems / currentPageSize);
 
@@ -30,9 +30,7 @@ export const usePagination = ({
 
   const handlePageSizeChange = (size: number) => {
     setCurrentPageSize(size);
-    setCurrentPage(1);
   };
-
   return {
     currentPage,
     pageSize: currentPageSize,

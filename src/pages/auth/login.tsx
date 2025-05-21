@@ -11,7 +11,7 @@ const Login: React.FC = () => {
 
   const onFinish = () => {
     dispatch(login());
-    navigate("/welcome");
+    navigate("/lesson");
   };
 
   return (
