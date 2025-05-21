@@ -28,7 +28,7 @@ const Lesson6 = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [result, setResult] = useState<any>(null);
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const tagsParam = searchParams.get("tags");
@@ -49,14 +49,13 @@ const Lesson6 = () => {
     }
     // eslint-disable-next-line
   }, []);
-
   const handleFilter = () => {
-    const params = new URLSearchParams();
-    if (tags.length) params.set("tags", tags.join(","));
-    if (lastName) params.set("lastName", lastName);
-    if (that) params.set("that", that);
-    if (text) params.set("text", text);
-    navigate(`?${params.toString()}`);
+    const newParams: Record<string, string> = {};
+    if (tags.length) newParams.tags = tags.join(",");
+    if (lastName) newParams.lastName = lastName;
+    if (that) newParams.that = that;
+    if (text) newParams.text = text;
+    setSearchParams(newParams);
     setResult({ tags, lastName, that, text });
   };
 
