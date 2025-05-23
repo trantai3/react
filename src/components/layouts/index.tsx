@@ -7,11 +7,11 @@ const { Header, Sider, Content } = Layout;
 const LayoutUser = () => {
   return (
     <Layout className="!min-h-screen">
-      <Header className="!bg-white">
+      <Header className="!bg-white !px-[10px]">
         <HeaderUser />
       </Header>
       <Layout>
-        <Sider className="!bg-white">
+        <Sider width="10%" className="!bg-white">
           <SiderUser />
         </Sider>
         <Content>

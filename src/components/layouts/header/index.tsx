@@ -13,14 +13,22 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between items-center">
-      <Link to="/lesson">
-        <Button type="primary">All lesson</Button>
+    <div className="flex h-full justify-between items-center">
+      <Link className="!text-black" to="/lesson">
+        <span className="px-[12px] py-[8px] rounded-[8px] hover:bg-[#F3F4F6]">
+          All lesson
+        </span>
       </Link>
-      <b className="text-[24px] text-[#1677ff]">
-        Bài thực hành react ( ts required )
-      </b>
-      <Button type="primary" onClick={handleLogout}>
+      <b className="text-black">Bài thực hành react ( ts required )</b>
+      <Button
+        style={{
+          backgroundColor: "rgb(96 165 250 / 1)",
+          color: "white",
+          borderRadius: "4px",
+        }}
+        className="bg-[rgb(96 165 250 / 1)]"
+        onClick={handleLogout}
+      >
         Log out
       </Button>
     </div>

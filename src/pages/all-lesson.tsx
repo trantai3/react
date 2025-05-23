@@ -1,4 +1,4 @@
-import { Button, Flex } from "antd";
+import { Flex } from "antd";
 import { Link } from "react-router-dom";
 const allLessons = [
   {
@@ -36,15 +36,14 @@ const allLessons = [
 ];
 const AllLesson = () => {
   return (
-    <Flex wrap="wrap" className="!p-[32px] gap-[16px]">
+    <Flex wrap="wrap" className="!p-[32px] gap-[24px]">
       {allLessons.map((item, index) => (
-        <Link key={index} to={item.link} className="w-[calc(33.333%-16px)]">
-          <Button
-            type="primary"
-            className="w-full border border-gray-300 !py-8 box-border"
-          >
-            {item.title}
-          </Button>
+        <Link
+          key={index}
+          to={item.link}
+          className="w-[calc(33.333%-16px)] border !rounded-[4px] !hover:bg-[#e2e8f0] !bg-[#94a3b8] border-gray-300 !p-[32px]  box-border !text-black"
+        >
+          <p>{item.title}</p>
         </Link>
       ))}
     </Flex>

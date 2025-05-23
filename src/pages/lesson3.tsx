@@ -83,12 +83,12 @@ const Lesson3 = () => {
   );
 
   return (
-    <div className="p-5">
+    <div className="p-8 bg-white border-t border-l h-full border-[#ccc]">
+      <p className="mb-6 font-bold">Thực hành mockup data</p>
       <Table
         dataSource={users}
         columns={columns}
         rowKey="id"
-        bordered
         pagination={{
           defaultPageSize: 10,
           showSizeChanger: true,

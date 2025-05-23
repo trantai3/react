@@ -1,0 +1,13 @@
+.ant-popover.css-dev-only-do-not-override-1m2bkf9.css-dev-only-do-not-override-1m2bkf9.ant-popover-placement-bottomLeft {
+  border: 1px solid #ccc !important;
+  border-radius: 0;
+}
+
+.ant-popover-inner {
+  padding: 0 !important;
+}
+
+button.ant-btn.css-dev-only-do-not-override-1m2bkf9.ant-btn-default.ant-btn-color-default.ant-btn-variant-outlined.custom-button {
+  padding: 10px 16px !important;
+  border-radius: 0px;
+}

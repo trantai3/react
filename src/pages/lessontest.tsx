@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Input, Select, Button, Radio, Space, Table } from "antd";
+import { Input, Select, Button, Radio, Space } from "antd";
 import type { RadioChangeEvent } from "antd";
-import type { ColumnsType } from "antd/es/table";
 import { useSearchParams } from "react-router-dom";
 import {
   DeleteOutlined,
@@ -24,19 +23,13 @@ interface FilterCondition {
   operator: "AND" | "OR";
 }
 
-interface OutputData {
-  key: React.Key;
-  filter: string;
-  tags: string;
-}
-
 interface FilterState {
   searchText: string;
   tags: TagItem[];
   filterConditions: FilterCondition[];
 }
 
-const Lesson6: React.FC = () => {
+const LessonTest: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [searchText, setSearchText] = useState<string>("");
@@ -120,10 +113,11 @@ const Lesson6: React.FC = () => {
       const unlockedTags = currentTags.filter((tag) => !tag.isLocked);
       const tagsString = unlockedTags.map((tag) => tag.text).join(",");
 
-      setFilterOutput(JSON.stringify(filterJson));
+      setFilterOutput(JSON.stringify(filterJson, null, 2));
       setTagsOutput(tagsString);
 
-      console.log("JSON Output:", filterJson);
+      console.log("Generated JSON Output:", filterJson);
+      console.log("Generated Tags Output:", tagsString);
     },
     []
   );
@@ -338,31 +332,16 @@ const Lesson6: React.FC = () => {
 
     try {
       const filterStateJson = JSON.stringify(currentFilterState);
-      const isDefaultEmptyState =
-        currentFilterState.searchText === "" &&
-        currentFilterState.tags.length === 0 &&
-        currentFilterState.filterConditions.length === 1 &&
-        (currentFilterState.filterConditions[0].field === "" ||
-          currentFilterState.filterConditions[0].field === undefined) &&
-        (currentFilterState.filterConditions[0].condition === "" ||
-          currentFilterState.filterConditions[0].condition === undefined) &&
-        currentFilterState.filterConditions[0].value === "";
-
-      if (isDefaultEmptyState) {
-        setSearchParams({});
-        setFilterOutput(null);
-        setTagsOutput(null);
-      } else {
-        const encodedFilterState = encodeURIComponent(filterStateJson);
-        setSearchParams({ filter: encodedFilterState });
-        generateAndDisplayOutput(searchText, tags, filterConditions);
-      }
+      const encodedFilterState = encodeURIComponent(filterStateJson);
+      setSearchParams({ filter: encodedFilterState });
+      generateAndDisplayOutput(searchText, tags, filterConditions);
     } catch (error) {
       console.error("Failed to save filter state to URL:", error);
       setSearchParams({});
       setFilterOutput(null);
       setTagsOutput(null);
     }
+
   };
 
   const handleClearClick = () => {
@@ -381,33 +360,6 @@ const Lesson6: React.FC = () => {
     setTagsOutput(null);
     setSearchParams({});
   };
-
-  const columns: ColumnsType<OutputData> = [
-    {
-      title: "Filter",
-      dataIndex: "filter",
-      key: "filter",
-      render: (text: string) => (
-        <pre className="whitespace-pre-wrap break-words">{text}</pre>
-      ),
-    },
-    {
-      title: "Tags",
-      dataIndex: "tags",
-      key: "tags",
-    },
-  ];
-
-  const data: OutputData[] =
-    filterOutput !== null && tagsOutput !== null
-      ? [
-          {
-            key: "1",
-            filter: filterOutput,
-            tags: tagsOutput,
-          },
-        ]
-      : [];
 
   return (
     <div className="p-[20px] bg-white h-full border-t-[#ccc] border-t-[1px] border-l-[1px] border-l-[#ccc]">
@@ -586,12 +538,25 @@ const Lesson6: React.FC = () => {
           </Button>
         </Space>
 
-        {filterOutput !== null && (
-          <Table columns={columns} dataSource={data} pagination={false} />
-        )}
+        {(filterOutput || tagsOutput) && (
+        <div className="mt-[20px] border border-[#ccc]">
+          <div className="flex w-full border-b border-[#ccc]">
+            <div className="w-1/2 p-[16px] font-bold border-r border-[#ccc]">Filter</div>
+            <div className="w-1/2 p-[16px] font-bold">Tags</div>
+          </div>
+          <div className="flex w-full">
+            <div className="w-1/2 p-[16px] border-r border-[#ccc]">
+              {filterOutput && <pre>{filterOutput}</pre>}
+            </div>
+            <div className="w-1/2 p-[16px]">
+              {tagsOutput && <p>{tagsOutput}</p>}
+            </div>
+          </div>
+        </div>
+      )}
       </Space>
     </div>
   );
 };
 
-export default Lesson6;
+export default LessonTest;
