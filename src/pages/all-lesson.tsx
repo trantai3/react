@@ -36,12 +36,12 @@ const allLessons = [
 ];
 const AllLesson = () => {
   return (
-    <Flex wrap="wrap" className="!p-[32px] gap-[24px]">
+    <Flex className="!p-[32px] flex-wrap content-start gap-[24px] border-t border-l border-[#ccc] h-screen">
       {allLessons.map((item, index) => (
         <Link
           key={index}
           to={item.link}
-          className="w-[calc(33.333%-16px)] border !rounded-[4px] !hover:bg-[#e2e8f0] !bg-[#94a3b8] border-gray-300 !p-[32px]  box-border !text-black"
+          className="flex items-center w-[calc(33.333%-16px)] h-[100px] border !rounded-[4px] !bg-[#94a3b8] border-gray-300 !p-[32px]  box-border !text-black"
         >
           <p>{item.title}</p>
         </Link>

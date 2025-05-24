@@ -220,7 +220,7 @@ const Lesson5 = () => {
   );
 
   return (
-    <div className="bg-white">
+    <div className="bg-white border-t border-l border-[#ccc] p-5">
       <div className="flex justify-end px-4">
         <Popover
           className="mr-[20px]"

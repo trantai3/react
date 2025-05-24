@@ -155,7 +155,7 @@ const Lesson9 = () => {
     }
   };
   return (
-    <div>
+    <div className="p-5 border-t border-l border-[#ccc]">
       <Button onClick={handleAdd}>Thêm mới</Button>
       <Table columns={columns} dataSource={data} pagination={false} />
       <Pagination
@@ -166,7 +166,9 @@ const Lesson9 = () => {
         onChange={handlePageChange}
         onShowSizeChange={(_, size) => handlePageSizeChange(size)}
         showSizeChanger
-        showTotal={(total) => `Tổng số ${total} items`}
+        showTotal={(total, range) =>
+          `${range[0]}–${range[1]} of ${total} items`
+        }
       />
       <Modal
         title="Edit Product"

@@ -74,7 +74,7 @@ const Lesson7 = () => {
   }, [dispatch]);
 
   return (
-    <div className="p-5">
+    <div className="p-5 border-t border-l border-[#ccc] h-screen">
       <p className="mb-5">Tên công việc</p>
       <Form className="flex gap-5" form={form} onFinish={handleSubmit}>
         <Form.Item

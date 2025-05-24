@@ -239,7 +239,7 @@ const Lesson6: React.FC = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams.get("filter"), generateAndDisplayOutput]);
+  }, [generateAndDisplayOutput]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
@@ -338,25 +338,9 @@ const Lesson6: React.FC = () => {
 
     try {
       const filterStateJson = JSON.stringify(currentFilterState);
-      const isDefaultEmptyState =
-        currentFilterState.searchText === "" &&
-        currentFilterState.tags.length === 0 &&
-        currentFilterState.filterConditions.length === 1 &&
-        (currentFilterState.filterConditions[0].field === "" ||
-          currentFilterState.filterConditions[0].field === undefined) &&
-        (currentFilterState.filterConditions[0].condition === "" ||
-          currentFilterState.filterConditions[0].condition === undefined) &&
-        currentFilterState.filterConditions[0].value === "";
-
-      if (isDefaultEmptyState) {
-        setSearchParams({});
-        setFilterOutput(null);
-        setTagsOutput(null);
-      } else {
-        const encodedFilterState = encodeURIComponent(filterStateJson);
-        setSearchParams({ filter: encodedFilterState });
-        generateAndDisplayOutput(searchText, tags, filterConditions);
-      }
+      const encodedFilterState = encodeURIComponent(filterStateJson);
+      setSearchParams({ filter: encodedFilterState });
+      generateAndDisplayOutput(searchText, tags, filterConditions);
     } catch (error) {
       console.error("Failed to save filter state to URL:", error);
       setSearchParams({});
@@ -452,7 +436,6 @@ const Lesson6: React.FC = () => {
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    border: "1px solid #d9d9d9",
                     borderRadius: "4px",
                     padding: "2px 8px",
                   }}
@@ -460,12 +443,15 @@ const Lesson6: React.FC = () => {
                   <MinusCircleFilled
                     style={{
                       color: "#f5222d",
+                      fontSize: "20px",
                       cursor: "pointer",
+                      position: "relative",
                       marginRight: "4px",
+                      top: "-5px",
                     }}
                     onClick={() => handleRemoveTag(tag.id)}
                   />
-                  {tag.text}
+                  <p className="text-[14px]">{tag.text}</p>
                   {tag.isLocked ? (
                     <LockOutlined
                       onClick={() => handleToggleLockTag(tag.id)}
@@ -576,7 +562,7 @@ const Lesson6: React.FC = () => {
         <Space>
           <Button
             type="text"
-            className="!px-[36px] !py-[12px] border !bg-[#86efac] !rounded-[6px]"
+            className="!px-[36px] !py-[12px] border !bg-[#86efac] !rounded-[6px] !h-[50px] !text-white"
             onClick={handleFilterClick}
           >
             Filter
